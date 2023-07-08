@@ -1,4 +1,3 @@
-
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -28,9 +27,11 @@ function setup() {
 		isStatic: true
 	}
 
-	var ball_prop= {
+	var ball_prop={
+		isStatic: false,
 		restitution: 0.3,
-		frictionAir: 0.01
+		friction: 0,
+		//density: 1.2
 	}
 
 	var stand_prop= {
@@ -52,10 +53,10 @@ function setup() {
 	stand2= Bodies.rectangle(1100, 540, 15, 120, stand_prop);
 	World.add(world, stand2);
 
-	go= createImg("go.gif");
+	/*go= createImg("go.gif");
 	go.position(100, 100);
 	go.size(100, 100);
-	go.mouseClicked(force);
+	go.mouseClicked(force);*/
 	
 
 	Engine.run(engine);
@@ -81,9 +82,12 @@ function draw() {
  
 }
 
-function force(){
-	Matter.Body.applyForce(ball, {x:0, y:0}, {x:0.035, y:0.02});
+function keyPressed(){
+	if(keyDown("up")){
+	Matter.Body.applyForce(ball, {x:0, y:0}, {x:0.05, y:0.035});
+	}
 }
+
 
 
 
